@@ -16,7 +16,8 @@ Integrações: PokéAPI
 Subir o Backend (Django):
 
 Criar e ativar ambiente virtual 
-- cd backend python -m venv venv 
+- cd backend 
+- python -m venv venv 
 - (Windows) .\venv\Scripts\activate 
 - (Linux/Mac) source venv/bin/activate
 
