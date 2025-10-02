@@ -82,6 +82,10 @@ export class PokedexComponent implements OnInit {
     this.loadFavorites();
   }
 
+   filteredPokemons = computed(() => {
+    return this.pokemons();
+  });
+
   selectType(tipo: string): void {
     this.selectedType = tipo;
     this.loadPokemons(); // Chama a API com o filtro
