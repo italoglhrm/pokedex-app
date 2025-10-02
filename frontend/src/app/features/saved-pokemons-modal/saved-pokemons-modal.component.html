@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>Pokémon Salvos ({{ data.saved.length }})</h2>
+<div mat-dialog-content class="saved-container">
+  <article class="pokemon-card" *ngFor="let pokemon of data.saved">
+    <!-- Header -->
+    <header class="card-header">
+      <span class="pokemon-id">#{{ pokemon.codigo }}</span>
+      <div class="pokemon-types">
+        <span *ngFor="let tipo of pokemon.tipopokemon"
+              [ngClass]="getTypeBadgeClass(tipo)">
+          {{ getTypeDisplayName(tipo) }}
+        </span>
+      </div>
+    </header>
+
+    <!-- Image -->
+    <div class="pokemon-image">
+      <img [src]="pokemon.imagemurl"
+           [alt]="'Imagem do Pokémon ' + pokemon.nome"
+           (error)="onImageError($event)">
+    </div>
+
+    <!-- Info -->
+    <div class="pokemon-info">
+      <h3>{{ pokemon.nome | titlecase }}</h3>
+
+      <div class="stats-mini">
+        <div class="stat-bar">
+          <span class="stat-name">HP</span>
+          <div class="stat-progress">
+            <div class="stat-fill hp-fill" [style.width.%]="getStatPercentage(pokemon.hp)"></div>
+          </div>
+          <span class="stat-value">{{ pokemon.hp }}</span>
+        </div>
+
+        <div class="stat-bar">
+          <span class="stat-name">ATK</span>
+          <div class="stat-progress">
+            <div class="stat-fill attack-fill" [style.width.%]="getStatPercentage(pokemon.attack)"></div>
+          </div>
+          <span class="stat-value">{{ pokemon.attack }}</span>
+        </div>
+
+        <div class="stat-bar">
+          <span class="stat-name">DEF</span>
+          <div class="stat-progress">
+            <div class="stat-fill defense-fill" [style.width.%]="getStatPercentage(pokemon.defense)"></div>
+          </div>
+          <span class="stat-value">{{ pokemon.defense }}</span>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Fechar</button>
+</div>

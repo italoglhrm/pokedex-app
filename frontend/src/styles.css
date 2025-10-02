@@ -1,0 +1,48 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fafafa;
+}
+
+/* Painel do dropdown do mat-select (fora do componente, em overlay) */
+.pokedex-select-panel {
+  background: #ffffff !important;               /* fundo sólido */
+  border-radius: 8px !important;                /* cantos suaves */
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12) !important; /* elevação */
+  padding: 4px 0 !important;
+  /* opcional: largura mínima consistente */
+  min-width: 220px;
+}
+
+/* Itens */
+.pokedex-select-panel .mat-mdc-option {
+  padding: 10px 16px;
+}
+
+/* Hover e selecionado (discreto e clean) */
+.pokedex-select-panel .mat-mdc-option:hover {
+  background: #f5f6f7;
+}
+.pokedex-select-panel .mdc-list-item--selected {
+  background: rgba(249, 115, 22, 0.10);        /* laranja suave */
+}
+
+/* Remove qualquer transparência herdada */
+.pokedex-select-panel.mdc-menu-surface {
+  background-color: #ffffff !important;
+}
+
+/* Arredonda o container do MatDialog */
+.mat-mdc-dialog-container {
+  border-radius: 18px !important;
+  overflow: hidden; /* evita scrollbars estranhos nos cantos arredondados */
+}
+
+/* Corrige fundo do dropdown de menu */
+.mat-mdc-menu-panel {
+  background: #ffffff !important;      /* fundo branco sólido */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* sombra leve */
+}
+
+

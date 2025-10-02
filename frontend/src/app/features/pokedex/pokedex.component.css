@@ -1,0 +1,543 @@
+/* ===== BASE ===== */
+.pokedex-wrapper {
+  font-family: 'Roboto', sans-serif;
+  background: #fafafa; 
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #1e293b;
+  line-height: 1.5;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: #f97316; 
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08); /* sombra mais leve */
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 36px;  
+  height: 36px;
+}
+
+.header h1 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-team {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-team:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.btn-saved {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-saved:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+/* ===== BANNER ===== */
+.banner {
+  background: linear-gradient(to bottom, #f97316, #fafafa);
+  text-align: center;
+  padding: 24px 16px 28px;
+}
+
+.banner p {
+  font-size: 1.2rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* ===== METRICS ===== */
+.metrics {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.metric {
+  background: rgba(255, 255, 255, 0.6);   
+  backdrop-filter: blur(80px);            
+  -webkit-backdrop-filter: blur(6px);     
+  padding: 14px 18px;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  text-align: center;
+  min-width: 100px;
+}
+
+.metric strong {
+  font-size: 1.5rem;
+  color: #f97316;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.metric span {
+  font-size: 0.85rem;
+  color: #0c0c0c;
+}
+
+/* ===== TÍTULO SEÇÃO ===== */
+.filters h2 {
+  margin: 32px 32px 16px;
+  text-align: left;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* Layout container dos filtros */
+.search-filters {
+  display: flex;
+  justify-content: left;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  margin-left: 30px;
+}
+
+/* Campos */
+.search-field,
+.generation-field {
+  min-width: 220px;
+  max-width: 360px;
+}
+
+:host ::ng-deep .search-field .mat-mdc-text-field-wrapper,
+:host ::ng-deep .generation-field .mat-mdc-text-field-wrapper {
+  border-radius: 6px;                  
+  background: #fff;
+  border: 1px solid #e5e7eb;           
+  box-shadow: none;                    
+}
+
+/* Hover */
+:host ::ng-deep .search-field .mat-mdc-text-field-wrapper:hover,
+:host ::ng-deep .generation-field .mat-mdc-text-field-wrapper:hover {
+  border-color: #d1d5db;               /* borda mais visível */
+}
+
+/* Focus */
+:host ::ng-deep .search-field .mdc-text-field--focused .mdc-notched-outline__leading,
+:host ::ng-deep .search-field .mdc-text-field--focused .mdc-notched-outline__notch,
+:host ::ng-deep .search-field .mdc-text-field--focused .mdc-notched-outline__trailing,
+:host ::ng-deep .generation-field .mdc-text-field--focused .mdc-notched-outline__leading,
+:host ::ng-deep .generation-field .mdc-text-field--focused .mdc-notched-outline__notch,
+:host ::ng-deep .generation-field .mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-color: #f97316;              
+}
+
+/* Ajuste da seta do mat-select */
+:host ::ng-deep .generation-field .mat-mdc-select-arrow {
+  margin-right: 8px;
+  color: #6b7280;                      
+}
+
+/* ===== Ajustes de padding interno ===== */
+:host ::ng-deep .search-field .mat-mdc-form-field-infix,
+:host ::ng-deep .generation-field .mat-mdc-form-field-infix {
+  padding: 8px 12px !important;   
+  display: flex;
+  align-items: center;
+  min-height: 40px;              
+}
+
+/* ===== Label ===== */
+:host ::ng-deep .search-field .mat-mdc-floating-label,
+:host ::ng-deep .generation-field .mat-mdc-floating-label {
+  top: 20px !important;          
+  font-size: 0.85rem;
+  color: #6b7280;                 
+}
+
+/* ===== Ícone de lupa (suffix) ===== */
+:host ::ng-deep .search-field .mat-mdc-form-field-icon-suffix {
+  margin-right: 8px;
+  color: #6b7280;                
+  display: flex;
+  align-items: center;
+}
+
+/* ===== Ícone da seta do select ===== */
+:host ::ng-deep .generation-field .mat-mdc-select-arrow {
+  margin-right: 12px;
+  color: #6b7280;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+/* Ajusta o painel (dropdown) do mat-select */
+:host ::ng-deep .mat-mdc-select-panel {
+  background: #ffffff !important;     
+  border-radius: 6px;               
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12); 
+  padding: 4px 0;                 
+}
+
+/* ===== LOADING STATE ===== */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  padding: 40px;
+}
+
+.loading-spinner {
+  text-align: center;
+}
+
+.loading-spinner .spinning {
+  font-size: 48px;
+  color: #f97316;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+  margin-top: 16px;
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+/* ===== POKEMON GRID ===== */
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 24px;
+  flex: 1;
+}
+
+.pokemon-card {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.pokemon-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.pokemon-id {
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+/* ===== Badges informativas nos cards ===== */
+.pokemon-types {
+  display: flex;
+  flex-wrap: wrap;    
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+.pokemon-types span {
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.50);
+  display: inline-block;
+}
+
+/* Cada tipo com sua cor (cards) */
+.pokemon-types .fire    { background: #fb923c; }
+.pokemon-types .water   { background: #60a5fa; }
+.pokemon-types .grass   { background: #4ade80; }
+.pokemon-types .electric{ background: #facc15; text-shadow: 0 1px 1px rgba(0,0,0,0.4); }
+.pokemon-types .ice     { background: #7dd3fc; }
+.pokemon-types .fighting{ background: #f87171; }
+.pokemon-types .poison  { background: #a78bfa; }
+.pokemon-types .ground  { background: #eab676; text-shadow: 0 1px 1px rgba(0,0,0,0.4); }
+.pokemon-types .flying  { background: #93c5fd; }
+.pokemon-types .psychic { background: #f472b6; }
+.pokemon-types .bug     { background: #bef264; text-shadow: 0 1px 1px rgba(0,0,0,0.4); }
+.pokemon-types .rock    { background: #d6d3d1; color: #111; text-shadow: 0 1px 1px rgba(255,255,255,0.6); }
+.pokemon-types .ghost   { background: #c084fc; }
+.pokemon-types .dragon  { background: #818cf8; }
+.pokemon-types .dark    { background: #64748b; }
+.pokemon-types .steel   { background: #94a3b8; text-shadow: 0 1px 1px rgba(0,0,0,0.3); }
+.pokemon-types .fairy   { background: #f9a8d4; }
+.pokemon-types .normal  { background: #a8a878; }
+
+
+/* ===== Botões de filtro (tags) ===== */
+.type-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.type-btn {
+  border: none;                   /* sem borda */
+  background: #f5f5f5;          /* fundo neutro */
+  color: #333;                  /* texto padrão */
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); 
+}
+
+.type-btn:hover {
+  background: #e5e5e5;
+}
+
+.type-btn.active.fire    { background: #fb923c; color: #fff; }
+.type-btn.active.water   { background: #60a5fa; color: #fff; }
+.type-btn.active.grass   { background: #4ade80; color: #fff; }
+.type-btn.active.electric{ background: #facc15; color: #fff; }
+.type-btn.active.ice     { background: #7dd3fc; color: #fff; }
+.type-btn.active.fighting{ background: #f87171; color: #fff; }
+.type-btn.active.poison  { background: #a78bfa; color: #fff; }
+.type-btn.active.ground  { background: #eab676; color: #fff; }
+.type-btn.active.flying  { background: #93c5fd; color: #fff; }
+.type-btn.active.psychic { background: #f472b6; color: #fff; }
+.type-btn.active.bug     { background: #bef264; color: #111; }
+.type-btn.active.rock    { background: #d6d3d1; color: #111; }
+.type-btn.active.ghost   { background: #c084fc; color: #fff; }
+.type-btn.active.dragon  { background: #818cf8; color: #fff; }
+.type-btn.active.dark    { background: #64748b; color: #fff; }
+.type-btn.active.steel   { background: #94a3b8; color: #fff; }
+.type-btn.active.fairy   { background: #f9a8d4; color: #fff; }
+.type-btn.active.todos   { color: #111; box-shadow: 0 3px 8px rgba(0,0,0,0.3); }
+.type-btn.active.normal  { color: #111; box-shadow: 0 3px 8px rgba(0,0,0,0.3); }
+
+.pokemon-image {
+  text-align: center;
+  margin-bottom: 16px;
+  background: radial-gradient(circle, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 16px;
+  padding: 20px;
+  position: relative;
+}
+
+.pokemon-image img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.pokemon-card:hover .pokemon-image img {
+  transform: scale(1.05);
+}
+
+.pokemon-info {
+  margin-top: auto;
+}
+
+.pokemon-info h3 {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* ===== STATS MINI ===== */
+.stats-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stat-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stat-name {
+  width: 32px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.stat-progress {
+  flex: 1;
+  background: #e5e7eb;
+  height: 6px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.stat-fill { 
+  height: 100%; 
+  transition: width 0.3s ease;
+}
+
+.hp-fill { 
+  background: linear-gradient(90deg, #f87171, #ef4444);
+}
+
+.attack-fill { 
+  background: linear-gradient(90deg, #fb923c, #f97316);
+}
+
+.defense-fill { 
+  background: linear-gradient(90deg, #60a5fa, #3b82f6);
+}
+
+.stat-value {
+  min-width: 30px;
+  font-size: 0.75rem;
+  text-align: right;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  padding: 40px;
+}
+
+.empty-content {
+  text-align: center;
+  max-width: 400px;
+}
+
+.empty-icon {
+  font-size: 64px;
+  color: #cbd5e1;
+  margin-bottom: 16px;
+}
+
+.empty-content h3 {
+  font-size: 1.5rem;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.empty-content p {
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+.card-actions {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.btn-select {
+  background: #f97316;
+  border: none;
+  padding: 8px 52px;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 550;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.btn-select:hover:not(:disabled) {
+  background: #ea580c;
+}
+
+.btn-select:disabled {
+  background: #d1d5db;
+  color: #6b7280;
+  cursor: not-allowed;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between; /* id de um lado, tipos+icone do outro */
+  align-items: center;
+}
+
+.pokemon-types {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* reduz o espaço entre tags e ícone */
+}
+
+.save-btn {
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  padding: 0;
+}
+
+.save-btn mat-icon {
+  font-size: 22px;
+  color: #6b7280; /* cinza neutro */
+  transition: color 0.2s ease;
+}
+
+/* quando salvo */
+.save-btn.saved mat-icon {
+  color: #f97316; /* laranja pokédex */
+}

@@ -1,0 +1,201 @@
+<div class="pokedex-wrapper">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <img src="assets/logo.png" alt="Pokédex Logo" class="logo" />
+      <h1>Pokédex Digital</h1>
+    </div>
+    <div class="header-right">
+      <button class="btn-team" (click)="openTeam()">
+        Minha Equipe ({{ team.length }}/6)
+      </button>
+
+      <!-- Botão Salvos -->
+      <button class="btn-team" (click)="openSaved()">
+        Salvos ({{ savedPokemons.length }})
+      </button>
+      
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Sair</span>
+        </button>
+      </mat-menu>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <section class="banner">
+    <p>Explore o mundo dos Pokémon com nossa Pokédex interativa.</p>
+    <p>Descubra informações detalhadas sobre cada criatura.</p>
+    <div class="metrics">
+      <div class="metric">
+        <strong>{{ totalPokemons() }}</strong>
+        <span>Pokémon</span>
+      </div>
+      <div class="metric">
+        <strong>{{ totalTipos() }}</strong>
+        <span>Tipos</span>
+      </div>
+      <div class="metric">
+        <strong>{{ totalGeracoes }}</strong>
+        <span>Gerações</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filtros -->
+  <section class="filters">
+    <h2>Pokémon Descobertos</h2>
+
+    <!-- Filtros (busca + geração) -->
+    <div class="search-filters">
+      <!-- Busca -->
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Buscar por nome ou número</mat-label>
+        <input
+          matInput
+          [(ngModel)]="search"
+          (ngModelChange)="onSearchChange()"
+          placeholder="Ex: Pikachu"
+        />
+        <button mat-icon-button matSuffix disabled>
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>  
+
+      <!-- Seleção de geração -->
+      <mat-form-field appearance="outline" class="generation-field">
+        <mat-label>Geração</mat-label>
+        <mat-select
+          [(value)]="selectedGeneration"
+          (selectionChange)="onGenerationChange()"
+          panelClass="pokedex-select-panel"      
+        >
+          <mat-option value="">Todas as gerações</mat-option>
+          <mat-option *ngFor="let g of geracoes" [value]="g">Geração {{ g }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Filtros por Tipo -->
+    <div class="type-filters">
+      <button
+        *ngFor="let tipo of tipos; trackBy: trackByType"
+        class="type-btn"
+        [ngClass]="getTypeClass(tipo)"
+        (click)="selectType(tipo)"
+      >
+        {{ getTypeDisplayName(tipo) }}
+      </button>
+    </div>
+  </section>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading()" class="loading-container" role="status" aria-live="polite">
+    <div class="loading-spinner">
+      <mat-icon class="spinning" aria-hidden="true">autorenew</mat-icon>
+      <p>Carregando Pokémon...</p>
+    </div>
+  </div>
+
+  <!-- Pokemon Grid -->
+  <main class="pokemon-grid" *ngIf="!isLoading()" role="main" aria-label="Lista de Pokémon">
+    <article 
+      class="pokemon-card" 
+      *ngFor="let pokemon of filteredPokemons(); trackBy: trackByPokemonId"
+      [attr.data-pokemon-id]="pokemon.codigo"
+    >
+      <!-- Card Header -->
+      <header class="card-header">
+        <span class="pokemon-id">#{{ pokemon.codigo }}</span>
+
+        <div class="pokemon-types">
+          <span *ngFor="let tipo of pokemon.tipopokemon"
+                [ngClass]="getTypeBadgeClass(tipo)">
+            {{ getTypeDisplayName(tipo) }}
+          </span>
+
+          <!-- Ícone salvar -->
+          <button
+            mat-icon-button
+            type="button"
+            class="save-btn"
+            [ngClass]="{ 'saved': isSaved(pokemon) }"
+            (click)="$event.stopPropagation(); toggleSave(pokemon)"
+            aria-label="Salvar Pokémon"
+          >
+            <mat-icon>{{ isSaved(pokemon) ? 'bookmark' : 'bookmark_border' }}</mat-icon>
+          </button>
+        </div>
+      </header>
+
+      <!-- Pokemon Image -->
+      <div class="pokemon-image">
+        <img [src]="pokemon.imagemurl" [alt]="'Imagem do Pokémon ' + pokemon.nome" loading="lazy" (error)="onImageError($event)">
+      </div>
+
+      <!-- Pokemon Info -->
+      <div class="pokemon-info">
+        <h3>{{ pokemon.nome | titlecase }}</h3>
+        
+        <div class="stats-mini">
+          <div class="stat-bar">
+            <span class="stat-name">HP</span>
+            <div class="stat-progress">
+              <div class="stat-fill hp-fill" [style.width.%]="getStatPercentage(pokemon.hp, 255)"></div>
+            </div>
+            <span class="stat-value">{{ pokemon.hp }}</span>
+          </div>
+
+          <div class="stat-bar">
+            <span class="stat-name">ATK</span>
+            <div class="stat-progress">
+              <div class="stat-fill attack-fill" [style.width.%]="getStatPercentage(pokemon.attack, 255)"></div>
+            </div>
+            <span class="stat-value">{{ pokemon.attack }}</span>
+          </div>
+
+          <div class="stat-bar">
+            <span class="stat-name">DEF</span>
+            <div class="stat-progress">
+              <div class="stat-fill defense-fill" [style.width.%]="getStatPercentage(pokemon.defense, 255)"></div>
+            </div>
+            <span class="stat-value">{{ pokemon.defense }}</span>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <button class="btn-select"
+                  (click)="toggleTeam(pokemon)"
+                  [disabled]="!isInTeam(pokemon) && team.length >= 6">
+            {{ getTeamButtonLabel(pokemon) }}
+          </button>
+        </div>
+      </div>
+    </article>
+  </main>
+
+
+  <!-- Empty State -->
+  <div *ngIf="!isLoading() && filteredPokemons().length === 0" 
+       class="empty-state" 
+       role="region" 
+       aria-live="polite">
+    <div class="empty-content">
+      <mat-icon class="empty-icon" aria-hidden="true">search_off</mat-icon>
+      <h3>Nenhum Pokémon encontrado</h3>
+      <button 
+        mat-raised-button 
+        color="primary" 
+        (click)="clearAllFilters()"
+        aria-label="Limpar todos os filtros de busca"
+      >
+        Limpar Filtros
+      </button>
+    </div>
+  </div>
+</div>

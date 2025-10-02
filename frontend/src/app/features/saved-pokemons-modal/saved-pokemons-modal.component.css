@@ -1,0 +1,221 @@
+/* Container do modal */
+.saved-container {
+  padding: 24px 0;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* Grid de Pokémon - layout horizontal */
+.saved-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 16px;
+}
+
+/* Cards dos Pokémon - horizontal */
+.pokemon-card {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  min-height: 140px;
+  position: relative;
+}
+
+.pokemon-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Header do Card */
+.card-header {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 1;
+}
+
+.pokemon-id {
+  font-weight: 600;
+  color: #64748b;
+  font-size: 0.8rem;
+  letter-spacing: 0.025em;
+}
+
+.pokemon-types {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Type Badges */
+.type-badge {
+  padding: 1px 6px;
+  border-radius: 8px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  color: white;
+}
+
+.type-badge.normal { background: #a8a878; }
+.type-badge.fire { background: #ef4444; }
+.type-badge.water { background: #3b82f6; }
+.type-badge.electric { background: #eab308; color: #1e293b; }
+.type-badge.grass { background: #22c55e; }
+.type-badge.ice { background: #06b6d4; }
+.type-badge.fighting { background: #c03028; }
+.type-badge.poison { background: #a855f7; }
+.type-badge.ground { background: #e0c068; color: #1e293b; }
+.type-badge.flying { background: #a890f0; }
+.type-badge.psychic { background: #a855f7; }
+.type-badge.bug { background: #a8b820; }
+.type-badge.rock { background: #b8a038; }
+.type-badge.ghost { background: #705898; }
+.type-badge.dragon { background: #7c3aed; }
+.type-badge.dark { background: #705848; }
+.type-badge.steel { background: #b8b8d0; color: #1e293b; }
+.type-badge.fairy { background: #ee99ac; color: #1e293b; }
+
+/* Imagem do Pokémon - à esquerda */
+.pokemon-image {
+  text-align: center;
+  background: radial-gradient(circle, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 120px;
+  max-width: 120px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pokemon-image img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.pokemon-card:hover .pokemon-image img {
+  transform: scale(1.05);
+}
+
+/* Info do Pokémon - à direita */
+.pokemon-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 24px;
+}
+
+.pokemon-info h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 12px 0;
+  text-align: left;
+  letter-spacing: -0.025em;
+}
+
+/* Stats */
+.stats-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+}
+
+.stat-name {
+  width: 36px;
+  font-weight: 600;
+  color: #64748b;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-progress {
+  flex: 1;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.stat-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.hp-fill {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+.attack-fill {
+  background: linear-gradient(90deg, #f97316, #ea580c);
+}
+
+.defense-fill {
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+}
+
+.stat-value {
+  width: 32px;
+  text-align: right;
+  font-weight: 600;
+  color: #475569;
+  font-size: 0.8rem;
+}
+
+/* Mensagem vazia */
+.empty-msg {
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+  padding: 40px 20px;
+  font-size: 1rem;
+}
+
+/* Dialog Actions */
+::ng-deep .mat-mdc-dialog-actions {
+  padding: 16px 24px !important;
+  justify-content: flex-end !important;
+}
+
+/* Título do Dialog */
+::ng-deep .mat-mdc-dialog-title {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  margin-bottom: 0 !important;
+  padding: 24px 24px 16px !important;
+}
+
+/* Conteúdo do Dialog */
+::ng-deep .mat-mdc-dialog-content {
+  padding: 0 24px !important;
+}
